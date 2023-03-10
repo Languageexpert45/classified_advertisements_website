@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const SearchWrapper = styled.div`
-  width: 1440px;
-  height: 136px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 43px 141px 43px;
+  margin-bottom: 43px;
 `;
 
 export const SearchInput = styled.input`

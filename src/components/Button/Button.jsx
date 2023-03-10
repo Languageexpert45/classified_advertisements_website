@@ -6,11 +6,17 @@ function Button({
   isTransparent,
   isHeaderButton,
   isSearchButton,
+  isShowPhoneButton,
   callback,
   isVisible,
+  isSmall,
 }) {
   if (isSearchButton) {
-    return <S.searchButton onClick={callback}>{buttonName}</S.searchButton>;
+    return (
+      <S.searchButton showPhoneButton={isShowPhoneButton} onClick={callback}>
+        {buttonName}
+      </S.searchButton>
+    );
   }
 
   if (isHeaderButton) {
@@ -19,6 +25,7 @@ function Button({
         visible={isVisible}
         transparent={isTransparent}
         onClick={callback}
+        small={isSmall}
       >
         {buttonName}
       </S.headerButton>

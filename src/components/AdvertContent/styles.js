@@ -11,7 +11,6 @@ export const AdvertContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 0px 139px;
   height: 922px;
 `;
 

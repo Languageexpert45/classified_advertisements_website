@@ -8,7 +8,7 @@ function Main() {
   return (
     <S.MainWrapper>
       <Search />
-      <AdvertContent />
+      <AdvertContent title='Объявления'/>
     </S.MainWrapper>
   );
 }

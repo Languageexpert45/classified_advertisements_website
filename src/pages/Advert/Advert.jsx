@@ -1,8 +1,11 @@
 import React from "react";
-import AdvertItem from "../AdvertItem/AdvertItem";
 import * as S from "./styles";
+import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage";
+import AdvertItemDetails from "../../components/AdvertItemDetails/AdvertItemDetails";
+import AdvertImageSlider from "../../components/AdvertImageSlider/AdvertImageSlider";
+import AdvertItemDescription from "../../components/AdvertItemDescription/AdvertItemDescription";
 
-function AdvertContent({title}) {
+function Advert() {
   const advertMockData = [
     {
       id: 1,
@@ -10,6 +13,7 @@ function AdvertContent({title}) {
       price: "2200 ₽",
       city: "Санкт-Петербург",
       time: "Сегодня в 10:45",
+      detailedDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     },
     {
       id: 2,
@@ -89,22 +93,23 @@ function AdvertContent({title}) {
       time: "Сегодня в 10:45",
     },
   ];
+
   return (
-    <S.AdvertContainer>
-      <S.AdvertContentTitle>{title}</S.AdvertContentTitle>
-      <S.AdvertContentWrapper>
-        {advertMockData?.map((element) => (
-          <AdvertItem
-            description={element.description}
-            price={element.price}
-            city={element.city}
-            time={element.time}
-            key={element.id}
-          />
-        ))}
-      </S.AdvertContentWrapper>
-    </S.AdvertContainer>
+    <S.AdvertWrapper>
+      <ReturnToMainPage />
+      <S.AdvertContentBox>
+        <AdvertImageSlider />
+        <AdvertItemDetails
+          description={advertMockData[0].description}
+          price={advertMockData[0].price}
+          city={advertMockData[0].city}
+          time={advertMockData[0].time}
+          reviewsNumber="24"
+        />
+      </S.AdvertContentBox>
+      <AdvertItemDescription itemDescription={advertMockData[0].detailedDescription} />
+    </S.AdvertWrapper>
   );
 }
 
-export default AdvertContent;
+export default Advert;

@@ -8,3 +8,8 @@ export const Header = styled.header`
   justify-content: flex-end;
   padding-right: 150px;
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;

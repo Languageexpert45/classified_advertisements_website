@@ -7,10 +7,12 @@ import { AppRoutes } from "../../routes";
 import Header from "../Header/Header";
 
 function App() {
+
+  const { pathname } = useLocation();
   return (
     <S.AppWrapper>
       <GlobalStyle />
-      <Header/>
+      <Header location={pathname}/>
 
       <AppRoutes />
     </S.AppWrapper>

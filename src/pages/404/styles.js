@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 
-export const StyledNotFound = styled.div`
+
+export const NotFoundWrapper = styled.div`
   display: flex;
   justify-content: center;
-  color: white;
-  padding: 50vh;
-`
+  align-items: center;
+  height: 50vh;
+`;
+
+export const NotFound = styled.h1`
+  color: red;
+`;
