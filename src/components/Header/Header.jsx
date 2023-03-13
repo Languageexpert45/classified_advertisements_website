@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import Button from "../Button/Button";
@@ -6,10 +6,11 @@ import AddNewAdvertPopup from "../AddNewAdvertPopup/AddNewAdvertPopup";
 
 function Header({ location }) {
   const [popupActive, setPopupActive] = useState(false);
+  const navigate = useNavigate();
 
   const handlePopupActive = () => {
     setPopupActive(!popupActive);
-  }
+  };
   return (
     <>
       <AddNewAdvertPopup active={popupActive} isActive={handlePopupActive} />
@@ -36,6 +37,7 @@ function Header({ location }) {
               isVisible
               isTransparent
               buttonName="Личный кабинет"
+              callback={() => navigate("/myprofile")}
             />
           </S.ButtonsWrapper>
         )}

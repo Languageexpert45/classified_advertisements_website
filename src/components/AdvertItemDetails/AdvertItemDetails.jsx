@@ -1,9 +1,12 @@
-import React from "react";
+import {React, useState} from "react";
 import * as S from "./styles";
 import Button from "../Button/Button";
 import UserProfileLink from "../UserProfileLink/UserProfileLink";
 
-function AdvertItemDetails({ description, price, city, time, reviewsNumber }) {
+function AdvertItemDetails({ description, price, city, time, reviewsNumber, isActive }) {
+
+
+
   return (
     <S.AdvertDetailsWrapper>
       <S.AdvertDetailsDescription>{description}</S.AdvertDetailsDescription>

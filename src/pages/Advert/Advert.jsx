@@ -1,9 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
 import * as S from "./styles";
 import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage";
 import AdvertItemDetails from "../../components/AdvertItemDetails/AdvertItemDetails";
 import AdvertImageSlider from "../../components/AdvertImageSlider/AdvertImageSlider";
 import AdvertItemDescription from "../../components/AdvertItemDescription/AdvertItemDescription";
+import reviewsPopup from "../../components/reviewsPopup/ReviewsPopup";
 
 function Advert() {
   const advertMockData = [
@@ -13,7 +14,8 @@ function Advert() {
       price: "2200 ₽",
       city: "Санкт-Петербург",
       time: "Сегодня в 10:45",
-      detailedDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      detailedDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 2,
@@ -94,6 +96,8 @@ function Advert() {
     },
   ];
 
+  const [popupActive, setPopupActive] = useState(false);
+
   return (
     <S.AdvertWrapper>
       <ReturnToMainPage />
@@ -105,9 +109,12 @@ function Advert() {
           city={advertMockData[0].city}
           time={advertMockData[0].time}
           reviewsNumber="24"
+          isActive={setPopupActive}
         />
       </S.AdvertContentBox>
-      <AdvertItemDescription itemDescription={advertMockData[0].detailedDescription} />
+      <AdvertItemDescription
+        itemDescription={advertMockData[0].detailedDescription}
+      />
     </S.AdvertWrapper>
   );
 }
