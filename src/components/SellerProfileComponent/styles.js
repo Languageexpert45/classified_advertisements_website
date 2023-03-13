@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ComponentWrapper = styled.div`
   display: flex;
   gap: 50px;
+  margin-bottom: 44px;
 `;
 
 export const ComponentTitle = styled.h1`
@@ -12,7 +13,12 @@ export const ComponentTitle = styled.h1`
   color: #000000;
 `;
 
-export const SellerAvatar = styled.h1``;
+export const SellerAvatar = styled.div`
+  width: 170px;
+  height: 170px;
+  background: #f0f0f0;
+  border-radius: 50%;
+`;
 
 export const SellerBox = styled.div`
   display: flex;

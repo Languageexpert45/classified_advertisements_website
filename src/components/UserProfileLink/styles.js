@@ -4,6 +4,7 @@ export const UserProfileLinkWrapper = styled.div`
   display: flex;
   gap: 12px;
   margin-top: 34px;
+  cursor: pointer;
 `;
 
 export const UserAvatar = styled.div`

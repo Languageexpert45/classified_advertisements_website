@@ -1,36 +1,46 @@
-import React from "react";
+import {React, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import Button from "../Button/Button";
+import AddNewAdvertPopup from "../AddNewAdvertPopup/AddNewAdvertPopup";
 
 function Header({ location }) {
+  const [popupActive, setPopupActive] = useState(false);
+
+  const handlePopupActive = () => {
+    setPopupActive(!popupActive);
+  }
   return (
-    <S.Header>
-      {location === "/" ? (
-        <Button
-          isHeaderButton
-          isVisible
-          isTransparent
-          buttonName="Вход в личный кабинет"
-        />
-      ) : (
-        <S.ButtonsWrapper>
+    <>
+      <AddNewAdvertPopup active={popupActive} isActive={handlePopupActive} />
+      <S.Header>
+        {location === "/" ? (
           <Button
             isHeaderButton
             isVisible
             isTransparent
-            buttonName="Разместить объявление"
+            buttonName="Вход в личный кабинет"
           />
-          <Button
-            isSmall
-            isHeaderButton
-            isVisible
-            isTransparent
-            buttonName="Личный кабинет"
-          />
-        </S.ButtonsWrapper>
-      )}
-    </S.Header>
+        ) : (
+          <S.ButtonsWrapper>
+            <Button
+              isHeaderButton
+              isVisible
+              isTransparent
+              buttonName="Разместить объявление"
+              callback={handlePopupActive}
+            />
+            <Button
+              isSmall
+              isHeaderButton
+              isVisible
+              isTransparent
+              buttonName="Личный кабинет"
+            />
+          </S.ButtonsWrapper>
+        )}
+      </S.Header>
+    </>
   );
 }
 
