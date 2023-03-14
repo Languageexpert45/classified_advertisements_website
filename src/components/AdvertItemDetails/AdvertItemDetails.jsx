@@ -12,7 +12,9 @@ function AdvertItemDetails({ description, price, city, time, reviewsNumber, isAc
       <S.AdvertDetailsDescription>{description}</S.AdvertDetailsDescription>
       <S.AdvertDetailsTime>{time}</S.AdvertDetailsTime>
       <S.AdvertDetailsCity>{city}</S.AdvertDetailsCity>
-      <S.AdvertDetailsReviews>{reviewsNumber} отзыва</S.AdvertDetailsReviews>
+      <S.AdvertDetailsReviews onClick={isActive}>
+        {reviewsNumber} отзыва
+      </S.AdvertDetailsReviews>
       <S.AdvertDetailsPrice>{price}</S.AdvertDetailsPrice>
       <Button isSearchButton isShowPhoneButton buttonName="Показать телефон" />
       <UserProfileLink useName="Кирилл" firstSaleDate="01-02-2018" />

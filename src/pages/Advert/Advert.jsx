@@ -4,7 +4,7 @@ import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage
 import AdvertItemDetails from "../../components/AdvertItemDetails/AdvertItemDetails";
 import AdvertImageSlider from "../../components/AdvertImageSlider/AdvertImageSlider";
 import AdvertItemDescription from "../../components/AdvertItemDescription/AdvertItemDescription";
-import reviewsPopup from "../../components/reviewsPopup/ReviewsPopup";
+import ReviewsPopup from "../../components/reviewsPopup/ReviewsPopup";
 
 function Advert() {
   const advertMockData = [
@@ -98,24 +98,31 @@ function Advert() {
 
   const [popupActive, setPopupActive] = useState(false);
 
+  const handlePopupActive = () => {
+    setPopupActive(!popupActive);
+  };
+
   return (
-    <S.AdvertWrapper>
-      <ReturnToMainPage />
-      <S.AdvertContentBox>
-        <AdvertImageSlider />
-        <AdvertItemDetails
-          description={advertMockData[0].description}
-          price={advertMockData[0].price}
-          city={advertMockData[0].city}
-          time={advertMockData[0].time}
-          reviewsNumber="24"
-          isActive={setPopupActive}
+    <>
+      <ReviewsPopup active={popupActive} isActive={handlePopupActive} />
+      <S.AdvertWrapper>
+        <ReturnToMainPage />
+        <S.AdvertContentBox>
+          <AdvertImageSlider />
+          <AdvertItemDetails
+            description={advertMockData[0].description}
+            price={advertMockData[0].price}
+            city={advertMockData[0].city}
+            time={advertMockData[0].time}
+            reviewsNumber="24"
+            isActive={handlePopupActive}
+          />
+        </S.AdvertContentBox>
+        <AdvertItemDescription
+          itemDescription={advertMockData[0].detailedDescription}
         />
-      </S.AdvertContentBox>
-      <AdvertItemDescription
-        itemDescription={advertMockData[0].detailedDescription}
-      />
-    </S.AdvertWrapper>
+      </S.AdvertWrapper>
+    </>
   );
 }
 

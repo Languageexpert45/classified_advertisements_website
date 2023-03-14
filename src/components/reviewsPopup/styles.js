@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const popupBox = styled.div`
-  justify-content: center;
+  display: ${({ active }) => (active ? "block" : "none")};
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -13,10 +13,21 @@ export const reviewsWrapper = styled.div`
   flex-direction: column;
   background: #ffffff;
   height: 900px;
+  width: fit-content;
+  padding: 20px 98px 56px 50px;
   border-radius: 8px;
   position: relative;
-  top: 80px;
+  top: 0px;
+  left: 300px;
   transition: 0.3s;
+  transform: ${({ active }) => (active ? "scale(1)" : "scale(0)")};
+`;
+
+export const closeButtonBox = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 51px;
+  cursor: pointer;
 `;
 
 export const reviewsTitle = styled.h1`

@@ -7,7 +7,9 @@ function AddNewAdvertPopup({active, isActive}) {
   return (
     <S.popupBox active={active}>
       <S.addNewAdvertWrapper active={active}>
-        <ClosePopupButton callback={isActive} />
+        <S.closeButtonBox onClick={isActive}>
+          <ClosePopupButton />
+        </S.closeButtonBox>
         <S.newAdvertTitle>Новое объявление</S.newAdvertTitle>
         <S.addNewAdvertForm>
           <S.inputLabel>Название</S.inputLabel>

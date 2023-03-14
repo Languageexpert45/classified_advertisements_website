@@ -10,6 +10,13 @@ export const popupBox = styled.div`
   
 `;
 
+export const closeButtonBox = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 51px;
+  cursor: pointer;
+`;
+
 export const addNewAdvertWrapper = styled.div`
   display: flex;
   flex-direction: column;

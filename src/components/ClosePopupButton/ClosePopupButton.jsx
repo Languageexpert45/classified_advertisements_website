@@ -1,11 +1,9 @@
 import React from "react";
 import * as S from "./styles";
 
-function ClosePopupButton({ callback }) {
+function ClosePopupButton() {
   return (
-    <S.closeButton>
       <svg
-        onClick={callback}
         width="43"
         height="43"
         viewBox="0 0 43 43"
@@ -23,7 +21,6 @@ function ClosePopupButton({ callback }) {
           strokeWidth="2"
         />
       </svg>
-    </S.closeButton>
   );
 }
 
