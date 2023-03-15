@@ -21,6 +21,7 @@ function Header({ location }) {
             isVisible
             isTransparent
             buttonName="Вход в личный кабинет"
+            callback={() => navigate("/signin")}
           />
         ) : (
           <S.ButtonsWrapper>

@@ -48,6 +48,7 @@ export const addReviewForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-bottom: 30px;
 `;
 
 export const addReviewInput = styled.input`
@@ -68,4 +69,14 @@ export const itemReviewsBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  height: fit-content;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 10px;
+  }
 `;

@@ -104,7 +104,7 @@ function Advert() {
 
   return (
     <>
-      <ReviewsPopup active={popupActive} isActive={handlePopupActive} />
+      <ReviewsPopup active={popupActive} isActive={handlePopupActive} reviews />
       <S.AdvertWrapper>
         <ReturnToMainPage />
         <S.AdvertContentBox>

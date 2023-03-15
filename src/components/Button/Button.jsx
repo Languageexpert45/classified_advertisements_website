@@ -7,6 +7,8 @@ function Button({
   isHeaderButton,
   isSearchButton,
   isShowPhoneButton,
+  isLoginButton,
+  isRegisterButton,
   callback,
   isVisible,
   isSmall,
@@ -30,6 +32,14 @@ function Button({
         {buttonName}
       </S.headerButton>
     );
+  }
+
+  if (isLoginButton) {
+    return <S.loginButton onClick={callback}>{buttonName}</S.loginButton>;
+  }
+
+  if (isRegisterButton) {
+    return <S.registerButton onClick={callback}>{buttonName}</S.registerButton>;
   }
 }
 export default Button

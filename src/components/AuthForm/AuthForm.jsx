@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import Logo from '../Logo/Logo'
-import * as S from './styles'
-import Button from '../Button/Button'
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import * as S from "./styles";
+import Button from "../Button/Button";
+import LogoSkypro from "../LogoSkypro/LogoSkypro";
 
 function AuthForm({
   values,
@@ -10,69 +10,80 @@ function AuthForm({
   onChange,
   errors,
   isValid,
-  mathPasswordsError,
+  submitSuccessMSG,
 }) {
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
-
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   return (
-    <S.PopupArea>
-      <S.AuthForm onSubmit={onSubmit} noValidate>
-        <Logo $isBlackText="black" />
-        <S.FormInputFirst
-          type="text"
-          name="login"
-          placeholder="Логин"
-          value={values.login || ''}
-          minLength="2"
-          onChange={(event) => onChange(event)}
-          required
-        />
-        <S.FormSpan $isValid={isValid}>{errors.login}</S.FormSpan>
-        <S.FormInput
-          type="password"
-          name="password"
-          value={values.password || ''}
-          onChange={(event) => onChange(event)}
-          placeholder="Пароль"
-          minLength="8"
-          required
-        />
-        <S.FormSpan $isValid={isValid}>{errors.password}</S.FormSpan>
-        {pathname !== '/signin' && (
-          <>
-            <S.FormInput
-              type="password"
-              name="repeat_password"
-              placeholder="Повторите пароль"
-              minLength="8"
-              value={values.repeat_password || ''}
-              onChange={(event) => onChange(event)}
-              required
+    <S.authFormWrapper>
+      <LogoSkypro />
+      <S.authForm onSubmit={onSubmit} noValidate>
+        <S.InputBox>
+          <S.FormInput
+            type="text"
+            name="email"
+            value={values.email || ""}
+            placeholder="email"
+            onChange={(event) => onChange(event)}
+            required
+          />
+          <S.FormInput
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            value={values.password || ""}
+            onChange={(event) => onChange(event)}
+            required
+          />
+          {pathname === "/signup" && (
+            <>
+              <S.FormInput
+                type="password"
+                name="repeat_password"
+                placeholder="Повторите пароль"
+                onChange={(event) => onChange(event)}
+                required
+              />
+              <S.FormInput
+                type="text"
+                name="user_name"
+                placeholder="Имя (необязательно)"
+                onChange={(event) => onChange(event)}
+              />
+              <S.FormInput
+                type="text"
+                name="user_surname"
+                placeholder="Фамилия (необязательно)"
+                onChange={(event) => onChange(event)}
+              />
+              <S.FormInput
+                type="text"
+                name="user_city"
+                placeholder="Город (необязательно)"
+                onChange={(event) => onChange(event)}
+              />
+            </>
+          )}
+        </S.InputBox>
+        <S.ButtonsBox>
+          <Button
+            isLoginButton
+            isVisible
+            buttonName={pathname === "/signin" ? "Войти" : "Зарегистрироваться"}
+          />
+
+          {pathname !== "/signup" && (
+            <Button
+              callback={() => navigate("/signup")}
+              isRegisterButton
+              isVisible
+              buttonName="Зарегистрироваться"
             />
-            <S.FormSpan $isValid={isValid}>{errors.repeat_password}</S.FormSpan>
-          </>
-        )}
-
-        <S.FormSpanSubmit $isValid={isValid}>
-          {mathPasswordsError}
-        </S.FormSpanSubmit>
-        <S.FormButton type="submit" disabled={!isValid}>
-          {pathname === '/signin' ? 'Войти' : 'Зарегистрироваться'}
-        </S.FormButton>
-
-        {pathname === '/signin' && (
-          <S.FormButtonRegister
-            type="button"
-            title="Перейти к регистрации."
-            onClick={() => navigate('/signup')}
-          >
-            Зарегистрироваться
-          </S.FormButtonRegister>
-        )}
-      </S.AuthForm>
-    </S.PopupArea>
-  )
+          )}
+        </S.ButtonsBox>
+      </S.authForm>
+    </S.authFormWrapper>
+  );
 }
 
-export default AuthForm
+export default AuthForm;

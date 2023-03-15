@@ -19,6 +19,43 @@ export const searchButton = styled.button`
   }
 `;
 
+export const loginButton = styled.button`
+  cursor: pointer;
+  width: 278px;
+  height: 52px;
+  background: #009ee4;
+  border: 1px solid #009ee4;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #ffffff;
+  border: none;
+  transition: 0.3s;
+  &:hover {
+    background: #0080c1;
+  }
+`;
+
+export const registerButton = styled.button`
+  cursor: pointer;
+  width: 278px;
+  height: 52px;
+  background: transparent;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #00000;
+  transition: 0.3s;
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+`;
+
 export const headerButton = styled.button`
   display: ${({ visible }) => (!visible ? "none" : "block")};
   padding: 8px 24px 8px;
