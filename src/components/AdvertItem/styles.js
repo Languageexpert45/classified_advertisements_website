@@ -5,19 +5,19 @@ export const AdvertItemWrapper = styled.div`
   flex-direction: column;
   padding: 0px;
   width: 270px;
-  height: 441px;
+  height: fit-content;
 `;
 
 export const AdvertItemPicture = styled.div`
   width: 270px;
   height: 270px;
-  background: #f0f0f0;
+  background-color: #f0f0f0;
   margin-bottom: 20px;
+  background-image: url(${({ url }) => url});
 `;
 
 export const AdvertItemDescription = styled.p`
   width: 259px;
-  height: 52px;
   color: #009ee4;
   font-weight: 500;
   font-size: 22px;
@@ -26,7 +26,6 @@ export const AdvertItemDescription = styled.p`
 `;
 
 export const AdvertItemPrice = styled.p`
-  width: 77px;
   height: 33px;
   color: #000000;
   font-weight: 500;
@@ -36,7 +35,6 @@ export const AdvertItemPrice = styled.p`
 `;
 
 export const AdvertItemCity = styled.p`
-  width: 126px;
   height: 21px;
   color: #5f5f5f;
   font-weight: 400;

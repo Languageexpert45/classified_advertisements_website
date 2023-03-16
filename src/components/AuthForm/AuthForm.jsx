@@ -46,19 +46,19 @@ function AuthForm({
               />
               <S.FormInput
                 type="text"
-                name="user_name"
+                name="name"
                 placeholder="Имя (необязательно)"
                 onChange={(event) => onChange(event)}
               />
               <S.FormInput
                 type="text"
-                name="user_surname"
+                name="surname"
                 placeholder="Фамилия (необязательно)"
                 onChange={(event) => onChange(event)}
               />
               <S.FormInput
                 type="text"
-                name="user_city"
+                name="city"
                 placeholder="Город (необязательно)"
                 onChange={(event) => onChange(event)}
               />

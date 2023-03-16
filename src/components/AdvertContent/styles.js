@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const AdvertContentWrapper = styled.div`
+  height: fit-content;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 26px;
+  padding-bottom: 37px;
 `;
 
 export const AdvertContainer = styled.div`

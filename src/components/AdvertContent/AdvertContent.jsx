@@ -1,104 +1,28 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import AdvertItem from "../AdvertItem/AdvertItem";
 import * as S from "./styles";
+import { useGetAllAdsQuery } from "../../services/ads";
 
-function AdvertContent({title}) {
-  const advertMockData = [
-    {
-      id: 1,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 2,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 3,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 4,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 5,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 6,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 7,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 8,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 9,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 10,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 11,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 12,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-  ];
+function AdvertContent({ title }) {
+
+  const { data: allAds, error, isLoading } = useGetAllAdsQuery();
+  console.log(allAds);
+  const getCalendarTime = (value) => {
+    const date = new Date(value);
+    return date.toLocaleDateString();
+  };
+
   return (
     <S.AdvertContainer>
       <S.AdvertContentTitle>{title}</S.AdvertContentTitle>
       <S.AdvertContentWrapper>
-        {advertMockData?.map((element) => (
+        {allAds?.map((element) => (
           <AdvertItem
-            description={element.description}
+            picture={element.images[0]?.url }
+            title={element.title}
             price={element.price}
-            city={element.city}
-            time={element.time}
+            city={element.user.city}
+            time={getCalendarTime(element.created_on)}
             key={element.id}
           />
         ))}

@@ -1,5 +1,7 @@
 import { React, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/slices/auth";
 import * as S from "./styles";
 import Button from "../Button/Button";
 import AddNewAdvertPopup from "../AddNewAdvertPopup/AddNewAdvertPopup";
@@ -7,9 +9,19 @@ import AddNewAdvertPopup from "../AddNewAdvertPopup/AddNewAdvertPopup";
 function Header({ location }) {
   const [popupActive, setPopupActive] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlePopupActive = () => {
     setPopupActive(!popupActive);
+  };
+
+  const signOut = () => {
+    if (location === "/myprofile") {
+      dispatch(logOut());
+      navigate("/");
+    } else {
+      navigate("/myprofile");
+    }
   };
   return (
     <>
@@ -21,10 +33,10 @@ function Header({ location }) {
             isVisible
             isTransparent
             buttonName="Вход в личный кабинет"
-            callback={() => navigate("/signin")}
+            callback={() => navigate("/myprofile")}
           />
         ) : (
-          <S.ButtonsWrapper>
+          <S.ButtonsWrapper location={location}>
             <Button
               isHeaderButton
               isVisible
@@ -37,8 +49,10 @@ function Header({ location }) {
               isHeaderButton
               isVisible
               isTransparent
-              buttonName="Личный кабинет"
-              callback={() => navigate("/myprofile")}
+              buttonName={
+                location === "/myprofile" ? "Выход" : "Личный Кабинет"
+              }
+              callback={signOut}
             />
           </S.ButtonsWrapper>
         )}

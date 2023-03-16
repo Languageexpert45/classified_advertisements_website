@@ -9,7 +9,9 @@ export const Header = styled.header`
   padding-right: 150px;
 `;
 
+
 export const ButtonsWrapper = styled.div`
-  display: flex;
+  display: ${({ location }) =>
+    location !== "/signin" && location !== "/signup" ? "flex" : "none"};
   gap: 8px;
 `;
