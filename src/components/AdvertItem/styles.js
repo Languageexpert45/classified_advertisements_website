@@ -6,6 +6,7 @@ export const AdvertItemWrapper = styled.div`
   padding: 0px;
   width: 270px;
   height: fit-content;
+  cursor: pointer;
 `;
 
 export const AdvertItemPicture = styled.div`
@@ -14,9 +15,12 @@ export const AdvertItemPicture = styled.div`
   background-color: #f0f0f0;
   margin-bottom: 20px;
   background-image: url(${({ url }) => url});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
-export const AdvertItemDescription = styled.p`
+export const AdvertItemTitle = styled.p`
   width: 259px;
   color: #009ee4;
   font-weight: 500;

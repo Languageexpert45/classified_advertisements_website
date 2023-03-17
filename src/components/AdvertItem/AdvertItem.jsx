@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 
-function AdvertItem({ picture, title, price, city, time }) {
+
+function AdvertItem({ id, picture, title, price, city, time }) {
+  const navigate = useNavigate()
   return (
-    <S.AdvertItemWrapper>
-      <S.AdvertItemPicture url={picture}/>
-      <S.AdvertItemDescription>{title}</S.AdvertItemDescription>
+    <S.AdvertItemWrapper onClick={() => navigate(`/adv/${id}`)}>
+      <S.AdvertItemPicture url={`http://localhost:8090/${picture}`} />
+      <S.AdvertItemTitle>{title}</S.AdvertItemTitle>
       <S.AdvertItemPrice>{price} ₽</S.AdvertItemPrice>
       <S.AdvertItemCity>{city}</S.AdvertItemCity>
       <S.AdvertItemTime>{time}</S.AdvertItemTime>

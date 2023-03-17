@@ -8,26 +8,26 @@ export const adsApi = createApi({
   endpoints: (builder) => ({
     getAllAds: builder.query({
       query: () => "ads/",
-      headers: {
-        "Content-Type": "application/json",
-      },
     }),
-    // getAllSets: builder.query({
-    //   query: () => "selection/",
-    // }),
-    // addLike: builder.mutation({
-    //   query: (body) => ({
-    //     url: `track/${body.id}/favorite/`,
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${body.token}`,
-    //     },
-    //     method: "POST",
-    //     body,
-    //   }),
-    // }),
+    getAddById: builder.query({
+      query: (adId) => `ads/${adId}`,
+    }),
+    getAddComments: builder.query({
+      query: ({adId, userId}) => ({url:`ads/${adId}/comments?user_id=${userId}`}),
+    }),
+    addLike: builder.mutation({
+      query: (body) => ({
+        url: `track/${body.id}/favorite/`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${body.token}`,
+        },
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllAdsQuery } = adsApi;
+export const { useGetAllAdsQuery, useGetAddByIdQuery, useGetAddCommentsQuery } = adsApi;

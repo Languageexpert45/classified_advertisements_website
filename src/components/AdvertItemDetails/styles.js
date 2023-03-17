@@ -5,11 +5,9 @@ export const AdvertDetailsWrapper = styled.div`
   flex-direction: column;
   padding: 0px;
   width: 621px;
-  height: 418px;
 `;
 
-
-export const AdvertDetailsDescription = styled.p`
+export const AdvertDetailsTitle = styled.p`
   color: #000000;
   font-weight: 700;
   font-size: 32px;
@@ -26,7 +24,6 @@ export const AdvertDetailsPrice = styled.p`
 `;
 
 export const AdvertDetailsCity = styled.p`
-  width: 126px;
   height: 21px;
   color: #5f5f5f;
   font-weight: 400;

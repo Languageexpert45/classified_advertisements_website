@@ -14,7 +14,9 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/adv" element={<Advert />} />
+      <Route path="/adv">
+        <Route path="/adv:advertId" element={<Advert />} />
+      </Route>
       <Route path="/sellerprofile" element={<SellerProfile />} />
       <Route path="/signin" element={<Login />} />
       <Route path="/signup" element={<Register />} />

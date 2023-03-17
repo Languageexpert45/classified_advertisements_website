@@ -1,18 +1,24 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import * as S from "./styles";
 
 
 function AdvertImageSlider({images}) {
 
+  const [mainImage, setMainImage] = useState(null);
+
+
+
   return (
     <S.AdvertImageSliderWrapper>
-      <S.AdvertMainImage />
+      <S.AdvertMainImage url={`http://localhost:8090/${mainImage}`} />
       <S.AdvertPreviewBox>
-        <S.AdvertPreviewImage />
-        <S.AdvertPreviewImage />
-        <S.AdvertPreviewImage />
-        <S.AdvertPreviewImage />
-        <S.AdvertPreviewImage />
+        {images?.map((element) => (
+          <S.AdvertPreviewImage
+            url={`http://localhost:8090/${element?.url}`}
+            key={element?.id}
+            onClick={() => setMainImage(element?.url)}
+          />
+        ))}
       </S.AdvertPreviewBox>
     </S.AdvertImageSliderWrapper>
   );

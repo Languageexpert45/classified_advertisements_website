@@ -1,100 +1,29 @@
 import { React, useState } from "react";
+import { useParams } from "react-router-dom";
 import * as S from "./styles";
 import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage";
 import AdvertItemDetails from "../../components/AdvertItemDetails/AdvertItemDetails";
 import AdvertImageSlider from "../../components/AdvertImageSlider/AdvertImageSlider";
 import AdvertItemDescription from "../../components/AdvertItemDescription/AdvertItemDescription";
 import ReviewsPopup from "../../components/reviewsPopup/ReviewsPopup";
+import { useGetAddByIdQuery, useGetAddCommentsQuery } from "../../services/ads";
+import { getCalendarTime } from "../../utils/getCalendarTime";
 
 function Advert() {
-  const advertMockData = [
-    {
-      id: 1,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-      detailedDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    {
-      id: 2,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 3,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 4,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 5,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 6,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 7,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 8,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 9,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 10,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 11,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-    {
-      id: 12,
-      description: "Ракетка для большого тенниса Triumph Pro ST...",
-      price: "2200 ₽",
-      city: "Санкт-Петербург",
-      time: "Сегодня в 10:45",
-    },
-  ];
+  const { advertId } = useParams();
+
+  const {
+    data: adData,
+    error: adDataError,
+    isLoading: adDataIsLoading,
+  } = useGetAddByIdQuery(advertId);
+
+  const {
+    data: adComments,
+    error: adCommentsError,
+    isLoading: adCommentsIsLoading,
+  } = useGetAddCommentsQuery({ adId: advertId, userId: adData?.user.id });
+
 
   const [popupActive, setPopupActive] = useState(false);
 
@@ -104,23 +33,26 @@ function Advert() {
 
   return (
     <>
-      <ReviewsPopup active={popupActive} isActive={handlePopupActive} reviews />
+      <ReviewsPopup
+        active={popupActive}
+        isActive={handlePopupActive}
+        reviews={adComments}
+      />
       <S.AdvertWrapper>
         <ReturnToMainPage />
         <S.AdvertContentBox>
-          <AdvertImageSlider />
+          <AdvertImageSlider images={adData?.images} />
           <AdvertItemDetails
-            description={advertMockData[0].description}
-            price={advertMockData[0].price}
-            city={advertMockData[0].city}
-            time={advertMockData[0].time}
-            reviewsNumber="24"
-            isActive={handlePopupActive}
+            user={adData?.user}
+            title={adData?.title}
+            price={adData?.price}
+            city={adData?.user.city}
+            time={getCalendarTime(adData?.created_on)}
+            reviewsNumber={adComments?.length}
+            isActive={handlePopupActive} 
           />
         </S.AdvertContentBox>
-        <AdvertItemDescription
-          itemDescription={advertMockData[0].detailedDescription}
-        />
+        <AdvertItemDescription itemDescription={adData?.description} />
       </S.AdvertWrapper>
     </>
   );

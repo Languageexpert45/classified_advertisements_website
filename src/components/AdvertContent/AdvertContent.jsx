@@ -1,16 +1,13 @@
 import { React, useEffect, useState } from "react";
 import AdvertItem from "../AdvertItem/AdvertItem";
 import * as S from "./styles";
-import { useGetAllAdsQuery } from "../../services/ads";
+import { useGetAllAdsQuery} from "../../services/ads";
+import { getCalendarTime } from "../../utils/getCalendarTime";
 
 function AdvertContent({ title }) {
 
+
   const { data: allAds, error, isLoading } = useGetAllAdsQuery();
-  console.log(allAds);
-  const getCalendarTime = (value) => {
-    const date = new Date(value);
-    return date.toLocaleDateString();
-  };
 
   return (
     <S.AdvertContainer>
@@ -18,7 +15,8 @@ function AdvertContent({ title }) {
       <S.AdvertContentWrapper>
         {allAds?.map((element) => (
           <AdvertItem
-            picture={element.images[0]?.url }
+            id={element.id}
+            picture={element.images[0]?.url}
             title={element.title}
             price={element.price}
             city={element.user.city}

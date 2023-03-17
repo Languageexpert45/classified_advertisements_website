@@ -12,6 +12,10 @@ export const UserAvatar = styled.div`
   height: 40px;
   border-radius: 50%;
   background: #f0f0f0;
+  background-image: url(${({ avatarURL }) => avatarURL});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export const UserInfoContainer = styled.div`
