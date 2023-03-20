@@ -11,7 +11,7 @@ export const AdvertMainImage = styled.div`
   height: 480px;
   background: #f0f0f0;
   background-image: url(${({ url }) => url});
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 `;
@@ -27,7 +27,7 @@ export const AdvertPreviewImage = styled.div`
   height: 88px;
   background: #f0f0f0;
   background-image: url(${({ url }) => url});
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   &:hover {

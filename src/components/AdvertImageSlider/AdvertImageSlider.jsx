@@ -2,11 +2,17 @@ import {React, useState, useEffect} from "react";
 import * as S from "./styles";
 
 
-function AdvertImageSlider({images}) {
+function AdvertImageSlider({images, firstImage}) {
 
   const [mainImage, setMainImage] = useState(null);
+  
 
-
+  useEffect(() => {
+    if (firstImage) {
+      setMainImage(firstImage);
+    } 
+  }, [images]);
+  
 
   return (
     <S.AdvertImageSliderWrapper>

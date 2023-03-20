@@ -1,19 +1,15 @@
 import { React, useEffect, useState } from "react";
 import AdvertItem from "../AdvertItem/AdvertItem";
 import * as S from "./styles";
-import { useGetAllAdsQuery} from "../../services/ads";
 import { getCalendarTime } from "../../utils/getCalendarTime";
 
-function AdvertContent({ title }) {
-
-
-  const { data: allAds, error, isLoading } = useGetAllAdsQuery();
+function AdvertContent({ headTitle, contentData }) {
 
   return (
     <S.AdvertContainer>
-      <S.AdvertContentTitle>{title}</S.AdvertContentTitle>
+      <S.AdvertContentTitle>{headTitle}</S.AdvertContentTitle>
       <S.AdvertContentWrapper>
-        {allAds?.map((element) => (
+        {contentData?.map((element) => (
           <AdvertItem
             id={element.id}
             picture={element.images[0]?.url}

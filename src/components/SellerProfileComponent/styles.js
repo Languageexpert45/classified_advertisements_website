@@ -18,6 +18,10 @@ export const SellerAvatar = styled.div`
   height: 170px;
   background: #f0f0f0;
   border-radius: 50%;
+  background-image: url(${({ avatarURL }) => avatarURL});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export const SellerBox = styled.div`

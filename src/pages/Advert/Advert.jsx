@@ -22,7 +22,7 @@ function Advert() {
     data: adComments,
     error: adCommentsError,
     isLoading: adCommentsIsLoading,
-  } = useGetAddCommentsQuery({ adId: advertId, userId: adData?.user.id });
+  } = useGetAddCommentsQuery({ adId: advertId });
 
 
   const [popupActive, setPopupActive] = useState(false);
@@ -41,7 +41,7 @@ function Advert() {
       <S.AdvertWrapper>
         <ReturnToMainPage />
         <S.AdvertContentBox>
-          <AdvertImageSlider images={adData?.images} />
+          <AdvertImageSlider images={adData?.images} firstImage={adData?.images[0]?.url} />
           <AdvertItemDetails
             user={adData?.user}
             title={adData?.title}

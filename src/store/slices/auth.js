@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authApi } from "../../services/user";
+import { authApi } from "../../services/auth";
 
 const initialState = {
   access_token: "",

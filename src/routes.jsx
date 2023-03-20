@@ -17,7 +17,10 @@ export function AppRoutes() {
       <Route path="/adv">
         <Route path="/adv:advertId" element={<Advert />} />
       </Route>
-      <Route path="/sellerprofile" element={<SellerProfile />} />
+      <Route path="/sellerprofile">
+        <Route path="/sellerprofile:sellerId" element={<SellerProfile />} />
+      </Route>
+
       <Route path="/signin" element={<Login />} />
       <Route path="/signup" element={<Register />} />
       <Route path="*" element={<NotFound />} />

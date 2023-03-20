@@ -13,11 +13,11 @@ export const adsApi = createApi({
       query: (adId) => `ads/${adId}`,
     }),
     getAddComments: builder.query({
-      query: ({adId, userId}) => ({url:`ads/${adId}/comments?user_id=${userId}`}),
+      query: ({ adId }) => ({ url: `ads/${adId}/comments` }),
     }),
-    addLike: builder.mutation({
+    addComment: builder.mutation({
       query: (body) => ({
-        url: `track/${body.id}/favorite/`,
+        url: `ads?title=${body.title}&description=${body.description}&price=${body.price}`,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

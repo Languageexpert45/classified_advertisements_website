@@ -4,11 +4,13 @@ import * as S from "./styles";
 
 
 
-function UserProfileLink({useName, firstSaleDate, avatar}) {
+function UserProfileLink({useName, firstSaleDate, avatar, userId}) {
 
   const navigate = useNavigate()
     return (
-      <S.UserProfileLinkWrapper onClick= {() => navigate("/sellerprofile")}>
+      <S.UserProfileLinkWrapper
+        onClick={() => navigate(`/sellerprofile/${userId}`)}
+      >
         <S.UserAvatar avatarURL={avatar} />
         <S.UserInfoContainer>
           <S.UserName>{useName}</S.UserName>

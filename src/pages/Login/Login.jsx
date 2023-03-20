@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import useFormWithValidation from "../../utils/useFormWithValidation";
-import { useTokenMutation } from "../../services/user";
+import { useTokenMutation } from "../../services/auth";
 import { isLoggedInSelector } from "../../store/selectors/auth";
 import * as S from "./styles";
 import { tokenReceived } from "../../store/slices/auth";

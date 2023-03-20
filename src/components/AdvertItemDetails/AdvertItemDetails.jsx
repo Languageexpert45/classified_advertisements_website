@@ -15,7 +15,7 @@ function AdvertItemDetails({ title, price, city, time, reviewsNumber, isActive, 
       </S.AdvertDetailsReviews>
       <S.AdvertDetailsPrice>{price} ₽</S.AdvertDetailsPrice>
       <Button isSearchButton isShowPhoneButton buttonName="Показать телефон" />
-      <UserProfileLink useName={user?.name} firstSaleDate={user?.sells_from} avatar={`http://localhost:8090/${user?.avatar}`} />
+      <UserProfileLink userId={user?.id} useName={user?.name} firstSaleDate={user?.sells_from} avatar={`http://localhost:8090/${user?.avatar}`} />
     </S.AdvertDetailsWrapper>
   );
 }

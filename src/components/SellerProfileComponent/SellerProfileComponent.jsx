@@ -2,16 +2,16 @@ import { React } from "react";
 import * as S from "./styles";
 import Button from "../Button/Button";
 
-function SellerProfileComponent({ sellerName, city, firstSaleDate }) {
+function SellerProfileComponent({ sellerName, city, firstSaleDate, avatar }) {
   return (
     <>
       <S.ComponentTitle>Профиль продавца</S.ComponentTitle>
       <S.ComponentWrapper>
-        <S.SellerAvatar/>
+        <S.SellerAvatar avatarURL={`http://localhost:8090/${avatar}`} />
         <S.SellerBox>
           <S.SellerName>{sellerName}</S.SellerName>
           <S.SellerCity>{city}</S.SellerCity>
-          <S.FirstSaleDate>{firstSaleDate}</S.FirstSaleDate>
+          <S.FirstSaleDate>Продает товары с {firstSaleDate}</S.FirstSaleDate>
           <Button
             isShowPhoneButton
             isSearchButton

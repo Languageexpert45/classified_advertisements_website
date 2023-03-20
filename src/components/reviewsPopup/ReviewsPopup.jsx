@@ -3,6 +3,7 @@ import * as S from "./styles";
 import Button from "../Button/Button";
 import ClosePopupButton from "../ClosePopupButton/ClosePopupButton"
 import ReviewBox from "../ReviewBox/ReviewBox";
+import { getCalendarTime } from "../../utils/getCalendarTime";
 
 function reviewsPopup({ reviews, active, isActive }) {
   return (
@@ -18,26 +19,14 @@ function reviewsPopup({ reviews, active, isActive }) {
           <Button isVisible isSearchButton buttonName="Отправить" />
         </S.addReviewForm>
         <S.itemReviewsBox>
-          <ReviewBox
-            userName="Олег"
-            reviewDate="14 августа"
-            reviewContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <ReviewBox
-            userName="Олег"
-            reviewDate="14 августа"
-            reviewContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <ReviewBox
-            userName="Олег"
-            reviewDate="14 августа"
-            reviewContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <ReviewBox
-            userName="Олег"
-            reviewDate="14 августа"
-            reviewContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          />
+          {reviews?.map((element) => (
+            <ReviewBox
+              userName={element.author.name}
+              reviewDate={getCalendarTime(element.created_on)}
+              reviewContent={element.text}
+              key={element.id}
+            />
+          ))}
         </S.itemReviewsBox>
       </S.reviewsWrapper>
     </S.popupBox>

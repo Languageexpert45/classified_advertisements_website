@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import * as S from "./styles";
 import useFormWithValidation from "../../utils/useFormWithValidation";
-import { useRegisterMutation } from "../../services/user";
+import { useRegisterMutation } from "../../services/auth";
 
 function Register() {
   const navigate = useNavigate();
