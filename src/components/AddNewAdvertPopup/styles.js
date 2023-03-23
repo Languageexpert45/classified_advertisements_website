@@ -96,12 +96,17 @@ export const newAdvertImageUploadWrapper = styled.div`
   gap: 10px;
 `;
 
-export const imageUploadButton = styled.div`
+export const imageUploadInput = styled.input`
+  display: none;
+`;
+
+export const imageUploadPreview = styled.label`
   display: flex;
   align-items: center;
   background: #f0f0f0;
   width: 90px;
   height: 90px;
+  cursor:pointer;
 `;
 
 export const newAdvertPriceInput = styled.input`

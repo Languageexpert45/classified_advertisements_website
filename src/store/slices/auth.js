@@ -27,6 +27,7 @@ export const authSlice = createSlice({
         if (payload.access_token) {
           state.access_token = payload.access_token;
           localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("tokenAccess", payload.access_token);
         }
         if (payload.refresh_token) {
           localStorage.setItem("tokenRefresh", payload.refresh_token);
@@ -39,6 +40,7 @@ export const authSlice = createSlice({
       state.isLoggedIn = initialState.isLoggedIn;
       localStorage.removeItem("tokenRefresh");
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("tokenAccess");
     },
   },
   extraReducers: (builder) => {

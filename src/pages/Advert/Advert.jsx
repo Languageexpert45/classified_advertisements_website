@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as S from "./styles";
 import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage";
@@ -6,7 +6,7 @@ import AdvertItemDetails from "../../components/AdvertItemDetails/AdvertItemDeta
 import AdvertImageSlider from "../../components/AdvertImageSlider/AdvertImageSlider";
 import AdvertItemDescription from "../../components/AdvertItemDescription/AdvertItemDescription";
 import ReviewsPopup from "../../components/reviewsPopup/ReviewsPopup";
-import { useGetAddByIdQuery, useGetAddCommentsQuery } from "../../services/ads";
+import { useGetAdByIdQuery, useGetAdCommentsQuery } from "../../services/ads";
 import { getCalendarTime } from "../../utils/getCalendarTime";
 
 function Advert() {
@@ -16,13 +16,15 @@ function Advert() {
     data: adData,
     error: adDataError,
     isLoading: adDataIsLoading,
-  } = useGetAddByIdQuery(advertId);
+  } = useGetAdByIdQuery(advertId);
 
   const {
     data: adComments,
     error: adCommentsError,
     isLoading: adCommentsIsLoading,
-  } = useGetAddCommentsQuery({ adId: advertId });
+  } = useGetAdCommentsQuery({ adId: advertId });
+
+
 
 
   const [popupActive, setPopupActive] = useState(false);

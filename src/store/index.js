@@ -16,5 +16,5 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(authApi.middleware)
       .concat(adsApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
 });
