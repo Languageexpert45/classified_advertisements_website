@@ -65,6 +65,12 @@ export const addReviewInput = styled.input`
   }
 `;
 
+export const addReviewError = styled.p`
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
 export const itemReviewsBox = styled.div`
   display: flex;
   flex-direction: column;

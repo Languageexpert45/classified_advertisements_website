@@ -4,7 +4,7 @@ export const searchButton = styled.button`
   cursor: pointer;
   width: ${({ showPhoneButton }) => (showPhoneButton ? "214px" : "158px")};
   height: ${({ showPhoneButton }) => (showPhoneButton ? "62px" : "50px")};
-  background: #009ee4;
+  background: ${({ disabled }) => (disabled ? "grey" : "#009ee4")};
   border: 1px solid #009ee4;
   border-radius: 6px;
   font-style: normal;
@@ -15,7 +15,7 @@ export const searchButton = styled.button`
   border: none;
   transition: 0.3s;
   &:hover {
-    background: #0080c1;
+    background: ${({ disabled }) => (disabled ? "grey" : "#0080c1")};
   }
 `;
 
@@ -23,7 +23,7 @@ export const loginButton = styled.button`
   cursor: pointer;
   width: 278px;
   height: 52px;
-  background: #009ee4;
+  background: ${({ disabled }) => (disabled ? "grey" : "#009ee4")};
   border: 1px solid #009ee4;
   border-radius: 6px;
   font-style: normal;
@@ -34,7 +34,7 @@ export const loginButton = styled.button`
   border: none;
   transition: 0.3s;
   &:hover {
-    background: #0080c1;
+    background: ${({ disabled }) => (disabled ? "grey" : "#0080c1")};
   }
 `;
 

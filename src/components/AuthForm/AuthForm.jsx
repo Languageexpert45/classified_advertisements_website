@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import Button from "../Button/Button";
@@ -11,16 +11,20 @@ function AuthForm({
   errors,
   isValid,
   submitSuccessMSG,
+  submitErrorMSG,
+  buttonDisabled,
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const handleButtonDisabled = () => {};
   return (
     <S.authFormWrapper>
       <LogoSkypro />
       <S.authForm onSubmit={onSubmit} noValidate>
         <S.InputBox>
           <S.FormInput
-            type="text"
+            type="email"
             name="email"
             value={values.email || ""}
             placeholder="email"
@@ -65,11 +69,14 @@ function AuthForm({
             </>
           )}
         </S.InputBox>
+        <S.messageSuccessBox>{submitSuccessMSG}</S.messageSuccessBox>
+        <S.messageErrorBox>{submitErrorMSG}</S.messageErrorBox>
         <S.ButtonsBox>
           <Button
             isLoginButton
             isVisible
             buttonName={pathname === "/signin" ? "Войти" : "Зарегистрироваться"}
+            isDisabled={buttonDisabled}
           />
 
           {pathname !== "/signup" && (

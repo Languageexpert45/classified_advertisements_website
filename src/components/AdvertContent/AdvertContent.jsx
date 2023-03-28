@@ -3,7 +3,7 @@ import AdvertItem from "../AdvertItem/AdvertItem";
 import * as S from "./styles";
 import { getCalendarTime } from "../../utils/getCalendarTime";
 
-function AdvertContent({ headTitle, contentData }) {
+function AdvertContent({ headTitle, contentData, pathname }) {
 
   return (
     <S.AdvertContainer>

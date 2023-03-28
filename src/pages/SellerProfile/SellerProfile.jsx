@@ -33,6 +33,7 @@ function SellerProfile() {
           city={usersData[sellerId].city}
           firstSaleDate={usersData[sellerId].sells_from}
           avatar={usersData[sellerId]?.avatar}
+          phone={usersData[sellerId]?.phone}
         />
       ) : null}
 

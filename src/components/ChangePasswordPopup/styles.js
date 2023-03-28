@@ -1,12 +1,27 @@
 import styled, { css } from "styled-components";
 
+export const popupBox = styled.div`
+  display: ${({ active }) => (active ? "flex" : "none")};
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top:0px;
+  left: 0px;
+`;
+
 export const authFormWrapper = styled.div`
-  display: flex;
+  display: flex
   flex-direction: column;
   gap: 42px;
+  height: 300px;
   padding: 43px 47px 47px 41px;
   background: #ffffff;
   border-radius: 12px;
+  margin-top: 100px;
+  transition: 0.3s;
+  transform: ${({ active }) => (active ? "scale(1)" : "scale(0)")};
 `;
 
 export const authForm = styled.form`
@@ -27,6 +42,13 @@ export const FormInput = styled.input`
   }
 `;
 
+export const closeButtonBox = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+`;
+
 export const ButtonsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,7 +58,6 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 50px;
 `;
 
 export const messageSuccessBox = styled.p`

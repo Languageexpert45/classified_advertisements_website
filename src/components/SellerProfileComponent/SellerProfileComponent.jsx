@@ -1,8 +1,19 @@
-import { React } from "react";
+import { React, useState } from "react";
 import * as S from "./styles";
 import Button from "../Button/Button";
 
-function SellerProfileComponent({ sellerName, city, firstSaleDate, avatar }) {
+function SellerProfileComponent({
+  sellerName,
+  city,
+  firstSaleDate,
+  avatar,
+  phone,
+}) {
+  const [phoneNumber, setPhoneNumber] = useState("Показать телефон");
+
+  const handleShowPhone = () => {
+    setPhoneNumber(phone);
+  };
   return (
     <>
       <S.ComponentTitle>Профиль продавца</S.ComponentTitle>
@@ -15,7 +26,8 @@ function SellerProfileComponent({ sellerName, city, firstSaleDate, avatar }) {
           <Button
             isShowPhoneButton
             isSearchButton
-            buttonName="Показать телефон"
+            buttonName={phoneNumber}
+            callback={handleShowPhone}
           />
         </S.SellerBox>
       </S.ComponentWrapper>

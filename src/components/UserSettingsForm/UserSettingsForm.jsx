@@ -6,6 +6,7 @@ import {
   useChangeCurrentUserMutation,
   useChangeUserAvatarMutation,
 } from "../../services/user";
+import ChangePasswordForm from "../ChangePasswordPopup/ChangePasswordForm";
 
 function UserSettingsForm({ name, surname, city, phone, avatar }) {
   const { values, handleChange, errors, isValid, resetForm } =
@@ -14,6 +15,10 @@ function UserSettingsForm({ name, surname, city, phone, avatar }) {
   const [changeUserData] = useChangeCurrentUserMutation();
   const [changeAvatar] = useChangeUserAvatarMutation();
   const [file, setFile] = useState(null);
+  const [popupActive, setPopupActive] = useState(false);
+   const handlePopupActive = () => {
+     setPopupActive(!popupActive);
+   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +39,8 @@ function UserSettingsForm({ name, surname, city, phone, avatar }) {
   }, [file]);
 
   return (
-    <S.FormBox>
+    <S.UserSettingsBox>
+      <ChangePasswordForm active={popupActive} isActive={handlePopupActive} />
       <S.FormTitle>Настройки профиля</S.FormTitle>
       <S.FormWrapper>
         <S.FormAvatarBox>
@@ -47,25 +53,37 @@ function UserSettingsForm({ name, surname, city, phone, avatar }) {
               onChange={handleFileUpload}
             />
           </S.FormAvatarInputLabel>
+          <Button
+            isSearchButton
+            callback={handlePopupActive}
+            buttonName="Изменить пароль"
+          />
         </S.FormAvatarBox>
         <form onSubmit={handleSubmit}>
           <S.FormContainer>
             <S.FormNameBox>
-              <S.FormName
-                type="text"
-                placeholder={name}
-                name="name"
-                onChange={(event) => handleChange(event)}
-                value={values.name || ""}
-              />
-              <S.FormSurname
-                type="text"
-                placeholder={surname}
-                name="surname"
-                onChange={(event) => handleChange(event)}
-                value={values.surname || ""}
-              />
+              <S.FormLabel htmlFor="name">
+                Имя
+                <S.FormName
+                  type="text"
+                  placeholder={name}
+                  name="name"
+                  onChange={(event) => handleChange(event)}
+                  value={values.name || ""}
+                />
+              </S.FormLabel>
+              <S.FormLabel htmlFor="surname">
+                Фамилия
+                <S.FormSurname
+                  type="text"
+                  placeholder={surname}
+                  name="surname"
+                  onChange={(event) => handleChange(event)}
+                  value={values.surname || ""}
+                />
+              </S.FormLabel>
             </S.FormNameBox>
+            <S.FormLabel htmlFor="city">Город</S.FormLabel>
             <S.FormCity
               type="text"
               placeholder={city}
@@ -73,6 +91,7 @@ function UserSettingsForm({ name, surname, city, phone, avatar }) {
               onChange={(event) => handleChange(event)}
               value={values.city || ""}
             />
+            <S.FormLabel htmlFor="phone">Телефон</S.FormLabel>
             <S.FormPhone
               type="number"
               placeholder={phone}
@@ -84,7 +103,7 @@ function UserSettingsForm({ name, surname, city, phone, avatar }) {
           <Button isSearchButton buttonName="Сохранить" />
         </form>
       </S.FormWrapper>
-    </S.FormBox>
+    </S.UserSettingsBox>
   );
 }
 

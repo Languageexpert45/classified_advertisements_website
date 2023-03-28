@@ -7,26 +7,46 @@ import { useRegisterMutation } from "../../services/auth";
 
 function Register() {
   const navigate = useNavigate();
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const [userSignUp] = useRegisterMutation();
 
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
   const [submitSuccessMSG, setSubmitSuccessMSG] = useState("");
+  const [submitErrorMSG, setSubmitErrorMSG] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitSuccessMSG("");
+    if (!values.password && !values.email) {
+      setSubmitErrorMSG("Заполните поля пароль и email");
+    } 
+    if (!values.password) {
+      setSubmitErrorMSG("Заполните полe пароль");
+    }
+    if (!values.email) {
+      setSubmitErrorMSG("Заполните полe email");
+    }
     if (
       values.password === values.repeat_password &&
       values.password &&
       values.repeat_password
     ) {
-      setTimeout(() => navigate("/signin"), 1000);
+      try {
+        await userSignUp(values).unwrap();
+        setButtonDisabled(true)
+        setSubmitErrorMSG("");
+        setSubmitSuccessMSG("Вы успешно зарегистрированы");
+        setTimeout(() => navigate("/signin"), 2000);
+      } catch (err) {
+        if (err.data.detail[0].msg) {
+          setSubmitErrorMSG(err.data.detail[0].msg);
+        }
+      }
     } else if (values.password !== values.repeat_password) {
-      setSubmitSuccessMSG("Пароли не совпадают");
-    }
-    userSignUp(values);
+      setSubmitErrorMSG("Пароли не совпадают");
+      setButtonDisabled(false);
+    } 
   };
 
   return (
@@ -38,6 +58,8 @@ function Register() {
         errors={errors}
         isValid={isValid}
         submitSuccessMSG={submitSuccessMSG}
+        submitErrorMSG={submitErrorMSG}
+        buttonDisabled={buttonDisabled}
       />
     </S.registerWrapper>
   );

@@ -1,6 +1,5 @@
 import { React, useState, useEffect, useRef } from "react";
 import * as S from "./styles";
-import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 
 function Search({getSearchValue}) {
@@ -19,7 +18,6 @@ function Search({getSearchValue}) {
         name="search"
         onChange={handleChange}
       />
-      <Button isSearchButton buttonName="Найти" />
     </S.SearchWrapper>
   );
 }

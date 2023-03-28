@@ -52,3 +52,18 @@ export const AdvertDetailsReviews = styled.a`
   margin-bottom: 34px;
   cursor: pointer;
 `;
+
+export const AdvertButtonBlock = styled.a`
+  display: flex;
+  gap: 10px;
+`;
+
+export const UserPhoneBlock = styled.a`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const UserPhone = styled.p`
+  
+`;

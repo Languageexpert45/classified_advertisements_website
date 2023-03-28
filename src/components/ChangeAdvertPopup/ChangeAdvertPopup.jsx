@@ -3,23 +3,36 @@ import * as S from "./styles";
 import Button from "../Button/Button";
 import ClosePopupButton from "../ClosePopupButton/ClosePopupButton";
 import useFormWithValidation from "../../utils/useFormWithValidation";
-import ImageUploadButton from "../ImageUploadButton/ImageUploadButton";
-import { useAddAdMutation, useAddAdImageMutation } from "../../services/ads";
+import {
+  useAddAdImageMutation,
+  useGetAdByIdQuery,
+  useChangeAdTextMutation,
+} from "../../services/ads";
 
-function AddNewAdvertPopup({ active, isActive }) {
+function AdvertPopup({ active, isActive, advertId }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
-  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [submitSuccessMSG, setSubmitSuccessMSG] = useState("");
-  const [addAdvert] = useAddAdMutation();
+  const {
+    data: adData,
+    error: adDataError,
+    isLoading: adDataIsLoading,
+  } = useGetAdByIdQuery(advertId);
+  const [changeAdText] = useChangeAdTextMutation();
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [addAdvertImage] = useAddAdImageMutation();
   const [fileList, setFileList] = useState([]);
-  const [imageURLs, setImageURLs] = useState(null);
   const filesToUpload = fileList ? [...fileList] : [];
+
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+    setFileList(e.target.files);
+  };
+
   const canSave = [
-    values.titleAdv,
-    values.descriptionAdv,
-    values.priceAdv,
+    values.title,
+    values.description,
+    values.price,
   ].every(Boolean);
 
   useEffect(() => {
@@ -28,28 +41,15 @@ function AddNewAdvertPopup({ active, isActive }) {
     } else setButtonDisabled(true);
   }, [canSave]);
 
-  const handleFileUpload = (e) => {
-    e.preventDefault();
-    setFileList(e.target.files);
-
-    const files = [...e.target.files] || [];
-    const result = [];
-    files.forEach((file) => {
-      result.push(URL.createObjectURL(file));
-    });
-    setImageURLs(result);
-  };
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitSuccessMSG("");
-    const newAd = await addAdvert(values);
-    filesToUpload.forEach((file) => {
-      const dataFiles = new FormData();
-      dataFiles.append("file", file);
-      addAdvertImage({ files: dataFiles, adId: newAd.data.id });
-    });
-    setImageURLs(null);
+    changeAdText({ text: values, adId: advertId });
+    // filesToUpload.forEach((file) => {
+    //   const dataFiles = new FormData();
+    //   dataFiles.append("file", file);
+    //   addAdvertImage({ files: dataFiles, adId: advertId });
+    // });
     resetForm();
     isActive();
   };
@@ -59,23 +59,23 @@ function AddNewAdvertPopup({ active, isActive }) {
         <S.closeButtonBox onClick={isActive}>
           <ClosePopupButton />
         </S.closeButtonBox>
-        <S.newAdvertTitle>Новое объявление</S.newAdvertTitle>
+        <S.newAdvertTitle>Редактировать объявление</S.newAdvertTitle>
         <S.addNewAdvertForm onSubmit={handleSubmit}>
           <S.inputLabel>Название</S.inputLabel>
           <S.newAdvertNameInput
-            placeholder="Введите название"
+            placeholder={adData?.title}
             type="text"
-            name="titleAdv"
-            value={values.titleAdv || ""}
+            name="title"
+            value={values.title || ""}
             onChange={(event) => handleChange(event)}
             required
           />
           <S.inputLabel>Описание</S.inputLabel>
           <S.newAdvertDescriptionInput
-            placeholder="Введите описание"
+            placeholder={adData?.description}
             type="text"
-            name="descriptionAdv"
-            value={values.descriptionAdv || ""}
+            name="description"
+            value={values.description || ""}
             onChange={(event) => handleChange(event)}
           />
           <S.imageLabelWrapper>
@@ -85,34 +85,33 @@ function AddNewAdvertPopup({ active, isActive }) {
             </S.inputLabelRestriction>
           </S.imageLabelWrapper>
           <S.newAdvertImageUploadWrapper>
-            <S.imageUploadPreviewLabel active={imageURLs ? null : "true"}>
-              <ImageUploadButton />
-              <S.imageUploadInput
-                type="file"
-                name="file"
-                onChange={handleFileUpload}
-                multiple
-              />
-            </S.imageUploadPreviewLabel>
-            {imageURLs?.map((element) => (
+            {adData?.images.map((element) => (
               <S.imageUploadPreview
-                url={element}
-                key={imageURLs.indexOf(element)}
-              />
+                url={`http://localhost:8090/${element.url}`}
+                key={element.id}
+              >
+                <S.imageUploadInput
+                  type="file"
+                  name="file"
+                  onChange={handleFileUpload}
+                  multiple
+                />
+              </S.imageUploadPreview>
             ))}
           </S.newAdvertImageUploadWrapper>
           <S.inputLabel>Цена</S.inputLabel>
           <S.newAdvertPriceInput
+            placeholder={adData?.price}
             type="number"
-            name="priceAdv"
-            value={values.priceAdv || ""}
+            name="price"
+            value={values.price || ""}
             onChange={(event) => handleChange(event)}
           />
           <Button
             isDisabled={buttonDisabled}
             isSearchButton
             isVisible
-            buttonName="Опубликовать"
+            buttonName="Сохранить"
           />
         </S.addNewAdvertForm>
       </S.addNewAdvertWrapper>
@@ -120,4 +119,4 @@ function AddNewAdvertPopup({ active, isActive }) {
   );
 }
 
-export default AddNewAdvertPopup;
+export default AdvertPopup;

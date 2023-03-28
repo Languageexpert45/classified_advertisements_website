@@ -7,7 +7,8 @@ export const popupBox = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
-  
+  top:  0px;
+  left: 0px;
 `;
 
 export const closeButtonBox = styled.div`
@@ -100,22 +101,13 @@ export const imageUploadInput = styled.input`
   display: none;
 `;
 
-export const imageUploadPreviewLabel = styled.label`
-  display: ${({ active }) => (active ? "flex" : "none")};
+export const imageUploadPreview = styled.label`
+  display: flex;
   align-items: center;
-  justify-content: center;
   background: #f0f0f0;
   width: 90px;
   height: 90px;
   cursor: pointer;
-`;
-export const imageUploadPreview = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f0f0f0;
-  width: 90px;
-  height: 90px;
   background-image: url(${({ url }) => url});
   background-size: cover;
   background-position: center;

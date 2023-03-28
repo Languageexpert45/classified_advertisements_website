@@ -30,6 +30,7 @@ export const adsApi = createApi({
     }),
     getAdById: builder.query({
       query: (adId) => `ads/${adId}`,
+      providesTags: [AD_TAG, MY_AD_TAG],
     }),
     getAdComments: builder.query({
       query: ({ adId }) => ({ url: `ads/${adId}/comments` }),
@@ -67,6 +68,23 @@ export const adsApi = createApi({
       }),
       invalidatesTags: [MY_AD_TAG, AD_TAG],
     }),
+    changeAdText: builder.mutation({
+      query: ({ text, adId }) => ({
+        url: `ads/${adId}`,
+        Accept: "application/json",
+        method: "PATCH",
+        body: text,
+      }),
+      invalidatesTags: [MY_AD_TAG, AD_TAG],
+    }),
+    deleteAd: builder.mutation({
+      query: ({ adId }) => ({
+        url: `ads/${adId}`,
+        Accept: "application/json",
+        method: "DELETE",
+      }),
+      invalidatesTags: [MY_AD_TAG, AD_TAG],
+    }),
   }),
 });
 
@@ -75,7 +93,9 @@ export const {
   useGetAdByIdQuery,
   useGetAdCommentsQuery,
   useGetUserAdsQuery,
+  useChangeAdTextMutation,
   useAddCommentMutation,
   useAddAdMutation,
   useAddAdImageMutation,
+  useDeleteAdMutation,
 } = adsApi;

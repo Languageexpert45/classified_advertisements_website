@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import * as S from "./styles";
 import UserSettingsForm from "../../components/UserSettingsForm/UserSettingsForm";
 import ReturnToMainPage from "../../components/ReturnToMainPage/ReturnToMainPage";
@@ -8,6 +9,7 @@ import { useGetCurrentUserQuery } from "../../services/user";
 import { useGetUserAdsQuery } from "../../services/ads";
 
 function Profile() {
+  const { pathname } = useLocation();
   const {
     data: userData,
     error: userDataError,
@@ -20,8 +22,6 @@ function Profile() {
     isLoading: userAdDataIsLoading,
   } = useGetUserAdsQuery();
 
-  console.log(userAdData);
-
   return (
     <S.ProfileWrapper>
       <ReturnToMainPage />
@@ -33,7 +33,7 @@ function Profile() {
         phone={userData?.phone}
         avatar={userData?.avatar}
       />
-      <AdvertContent headTitle="Мои товары" contentData={userAdData} />
+      <AdvertContent headTitle="Мои товары" contentData={userAdData} location={pathname} />
     </S.ProfileWrapper>
   );
 }

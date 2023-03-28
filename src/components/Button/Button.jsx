@@ -12,10 +12,15 @@ function Button({
   callback,
   isVisible,
   isSmall,
+  isDisabled,
 }) {
   if (isSearchButton) {
     return (
-      <S.searchButton showPhoneButton={isShowPhoneButton} onClick={callback}>
+      <S.searchButton
+        disabled={isDisabled}
+        showPhoneButton={isShowPhoneButton}
+        onClick={callback}
+      >
         {buttonName}
       </S.searchButton>
     );
@@ -35,7 +40,11 @@ function Button({
   }
 
   if (isLoginButton) {
-    return <S.loginButton onClick={callback}>{buttonName}</S.loginButton>;
+    return (
+      <S.loginButton disabled={isDisabled} onClick={callback}>
+        {buttonName}
+      </S.loginButton>
+    );
   }
 
   if (isRegisterButton) {

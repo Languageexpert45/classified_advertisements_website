@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as S from "./styles";
@@ -14,14 +14,29 @@ function reviewsPopup({ reviews, active, isActive }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
   const [submitSuccessMSG, setSubmitSuccessMSG] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [addComment, result] = useAddCommentMutation();
 
-  const [addComment] = useAddCommentMutation();
+  const canSave = [values.text].every(Boolean);
+
+  useEffect(() => {
+    if (canSave) {
+      setButtonDisabled(false);
+    } else setButtonDisabled(true);
+  }, [canSave]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitSuccessMSG("");
-    addComment({comment: values, adId: advertId });
+    addComment({ comment: values, adId: advertId });
     resetForm();
   };
+
+  useEffect(() => {
+    if (result.status === "rejected") {
+      setSubmitSuccessMSG(result.error.data.detail);
+    }
+  });
 
   return (
     <S.popupBox active={active}>
@@ -40,8 +55,14 @@ function reviewsPopup({ reviews, active, isActive }) {
             placeholder="Введите отзыв"
             required
           />
-          <Button isVisible isSearchButton buttonName="Отправить" />
+          <Button
+            isDisabled={buttonDisabled}
+            isVisible
+            isSearchButton
+            buttonName="Отправить"
+          />
         </S.addReviewForm>
+        <S.addReviewError>{submitSuccessMSG}</S.addReviewError>
         <S.itemReviewsBox>
           {reviews?.map((element) => (
             <ReviewBox

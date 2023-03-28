@@ -26,6 +26,9 @@ export function AppRoutes() {
       <Route path="*" element={<NotFound />} />
       <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
         <Route path="/myprofile" element={<Profile />} />
+        <Route path="/myAdv">
+          <Route path="/myAdv:myAdvertId" element={<Advert />} />
+        </Route>
       </Route>
     </Routes>
   );
